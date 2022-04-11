@@ -36,12 +36,11 @@ class _LoginFixState extends State<LoginFix> {
                   body: SingleChildScrollView(
                       child: Form(
                         key: _formKey,
-                        child: Container(
+                        child: Center(
                           // constraints: const BoxConstraints.expand(),
                           // padding: EdgeInsets.only(top: 20),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Image.asset("assets/umb.png", width: 100, height: 100,),
                                 const SizedBox(height: 10,),
@@ -73,6 +72,7 @@ class _LoginFixState extends State<LoginFix> {
                                     width: 280,
                                     height: 40,
                                     child: TextFormField(
+                                      obscureText: true,
                                       controller: passwordController,
                                       decoration: const InputDecoration(
                                           labelText: "Password",
@@ -150,6 +150,7 @@ class _LoginFixState extends State<LoginFix> {
                                 //     );
                                 //   }).toList(),
                                 // ),
+                                SizedBox(height: 24,),
                                 SizedBox(
                                   width: 200,
                                   height: 40,

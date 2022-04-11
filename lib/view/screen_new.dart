@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ScreenNew extends StatefulWidget {
-  final String judul, isi;
+  final String judul, isi, title;
 
-  const ScreenNew({Key? key, required this.judul, required this.isi}) : super(key: key);
+  const ScreenNew({Key? key, required this.judul, required this.isi, required this.title}) : super(key: key);
 
   @override
   State<ScreenNew> createState() => _ScreenNewState();
@@ -28,6 +28,10 @@ class _ScreenNewState extends State<ScreenNew> {
               const SizedBox(height: 16,),
               Text(
                 widget.isi,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                widget.title,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               )
             ],

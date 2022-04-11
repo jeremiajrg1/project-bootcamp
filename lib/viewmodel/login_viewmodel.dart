@@ -14,7 +14,9 @@ class LoginViewModel extends ChangeNotifier{
   final _sharedPref = SharedPreferenceService();
   Data dataLogin = new Data();
 
-  LoginViewModel(BuildContext){}
+  LoginViewModel(BuildContext){
+    _sharedPref.removeSharedPref();
+  }
 
   void login(String username, String password, BuildContext context) async {
     final response = await _loginApi.login(username, password, context);

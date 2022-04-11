@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taniku/view/UI_Welcome_Screen.dart';
 import 'package:taniku/view/bottom_nav.dart';
+import 'package:taniku/view/homescreen.dart';
 import 'package:taniku/view/loginfix.dart';
 import 'package:taniku/view/registerfix.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const LoginFix(),
+      home: const HomePage(),
     );
   }
 }

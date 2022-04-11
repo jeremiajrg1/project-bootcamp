@@ -32,6 +32,9 @@ class _RegistScreenState extends State<RegistScreen> {
           return Consumer<RegisterViewModel>(
               builder: (context, viewModel, child) {
                 return Scaffold(
+                  appBar: AppBar(
+                    title: Text("Register"),
+                  ),
                     body: Container(
                       child: SingleChildScrollView(
                         padding: EdgeInsets.only(top: 40),
