@@ -2,8 +2,11 @@ class ListSertifikat {
   bool? isSuccess;
   String? message;
   List<Sertifikat>? data;
+  String? error;
 
-  ListSertifikat({this.isSuccess, this.message, this.data});
+  ListSertifikat({this.isSuccess, this.message, this.data, this.error});
+
+  factory ListSertifikat.withError(String error) => ListSertifikat(error: error);
 
   ListSertifikat.fromJson(Map<String, dynamic> json) {
     isSuccess = json['isSuccess'];

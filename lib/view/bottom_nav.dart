@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:taniku/view/TransaksiPages.dart';
+import 'package:taniku/view/detail_screen.dart';
 import 'package:taniku/view/homescreen.dart';
+import 'package:taniku/view/pengiriman.dart';
 import 'package:taniku/view/profil.dart';
+import 'package:taniku/view/transaksi_screen.dart';
 
 
 class BottomNav extends StatefulWidget {
@@ -15,6 +19,8 @@ class _BottomNavState extends State<BottomNav> {
   int _selectedNav = 0;
   final List _widgetOption = [
     const HomePage(),
+    const TransaksiPages(),
+    const Pengiriman_screen(),
     const ProfilPage(),
   ];
 
@@ -37,22 +43,22 @@ class _BottomNavState extends State<BottomNav> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.assignment),
-          //   label: 'Pesanan',
-          // ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.mail),
-          //   label: 'Inbox',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assignment),
+            label: 'Transaksi',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.outgoing_mail),
+            label: 'Pengiriman',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profil',
           ),
         ],
         currentIndex: _selectedNav,
-        selectedItemColor: Colors.redAccent,
-        unselectedItemColor: Colors.red,
+        selectedItemColor: Colors.greenAccent,
+        unselectedItemColor: Colors.green,
         showUnselectedLabels: true,
         onTap: _changeSelectedNav,
       ),

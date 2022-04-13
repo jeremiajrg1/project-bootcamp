@@ -25,7 +25,8 @@ class _HomePageState extends State<HomePage> {
               builder: (context, viewModel, child) {
                 return Scaffold(
                     appBar: AppBar(
-                      title: const Text("Contoh List"),
+                      title: const Text("Taniku"),
+                      automaticallyImplyLeading: false,
                     ),
                     body: Container(
                       margin: const EdgeInsets.all(16),
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
 
                             //--------------- ListView Horizontal ---------------------
-                            const Text("Data Bulan Horizontal",
+                            const Text("News",
                               style: TextStyle(fontWeight: FontWeight.bold),),
                             const SizedBox(height: 16,),
                             SizedBox(
@@ -106,6 +107,13 @@ class _HomePageState extends State<HomePage> {
                               itemBuilder: (context, index) {
                                 return InkWell(
                                     onTap: (){
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) => DetailScreen(kebun_id: viewModel.dataKebun[index].id.toString(),)
+                                          ),
+                                      );
+                                      // Navigator.push(context,
+                                      // MaterialPageRoute(builder: (context) => DetailScreen(kebun_id: viewModel.dataKebun[index].id.toString())),
+                                      // );
                                       // Navigator.push(context,
                                       //     MaterialPageRoute(builder: (context) => DetailScreen(
                                       //         alamat: viewModel.dataKebun[index].alamat.toString(),

@@ -2,8 +2,11 @@ class ListDokumen {
   bool? isSuccess;
   String? message;
   List<Dokumen>? data;
+  String? error;
 
-  ListDokumen({this.isSuccess, this.message, this.data});
+  ListDokumen({this.isSuccess, this.message, this.data, this.error});
+
+  factory ListDokumen.withError(String error) => ListDokumen(error: error);
 
   ListDokumen.fromJson(Map<String, dynamic> json) {
     isSuccess = json['isSuccess'];

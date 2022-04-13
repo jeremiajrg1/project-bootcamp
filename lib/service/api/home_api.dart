@@ -13,14 +13,14 @@ class HomeApi {
 
   Future<HomeModel> getListHome(BuildContext context) async {
     var uri = Uri.parse(baseUrl + "api/niaga/news").replace();
-    final tokenLocal = await SharedPreferenceService().getStringSharedPref("token");
+    final tokenLocal = "N2IyN2I0N2ZmZGU3MmE4NjgxNDhjZGZlNTA4ZGFhZTY0Zjc4YmI0Yw==";
     final petaniIdLocal = await SharedPreferenceService().getStringSharedPref("petani_id");
     final userIdLocal = await SharedPreferenceService().getStringSharedPref("user_id");
     Map<String, String> headersToken(String token) {
       return {
         'Content-Type' : 'application/json',
         'Accept' : 'application/json',
-        'Authorization' :'Bearer $token'
+        'Authorization' :'Bearer N2IyN2I0N2ZmZGU3MmE4NjgxNDhjZGZlNTA4ZGFhZTY0Zjc4YmI0Yw=='
       };
     }
     var _body = jsonEncode({
