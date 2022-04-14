@@ -22,6 +22,7 @@ class _ProfilPageState extends State<ProfilPage> {
               return Scaffold(
                 appBar: AppBar(
                   title: Text("Profil"),
+                  automaticallyImplyLeading: false,
                 ),
                 body: Center(
                   child: Container(

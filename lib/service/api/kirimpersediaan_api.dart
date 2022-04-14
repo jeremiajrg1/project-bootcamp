@@ -10,7 +10,7 @@ class PersediaanApi {
   var client = http.Client();
   var baseUrl = "http://34.126.79.39:81/";
 
-  Future<KirimPersediaanModel> kirimPersediaan(String pabrikId, BuildContext context) async {
+  Future<KirimPersediaanModel> kirimPersediaan(String pabrikId, String nama, String tanggal, String waktu, String tonasi, BuildContext context) async {
     var uri = Uri.parse(baseUrl + "api/niaga/reservasi/add").replace();
     final tokenLocal = "N2IyN2I0N2ZmZGU3MmE4NjgxNDhjZGZlNTA4ZGFhZTY0Zjc4YmI0Yw==";
     Map<String, String> headersToken(String token) {

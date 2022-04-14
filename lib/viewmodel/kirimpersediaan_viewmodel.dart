@@ -6,8 +6,9 @@ class KirimPersediaanViewModel extends ChangeNotifier {
 
   KirimPersediaanViewModel(BuildContext) {}
 
-  void kirimPersediaan(String pabrikId, BuildContext context) async {
-    final response = await _kirimPersedian.kirimPersediaan(pabrikId, context);
+  void kirimPersediaan(String pabrikId, String nama, String tanggal, String waktu, String tonasi,
+      BuildContext context) async {
+    final response = await _kirimPersedian.kirimPersediaan(pabrikId, nama, tanggal, waktu, tonasi, context);
     if (response.error == null) {
       if (response.isSuccess == true) {
         print(response.message.toString());

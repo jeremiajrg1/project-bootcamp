@@ -12,12 +12,12 @@ class TransaksiApi {
   
   Future<TransaksiModel> getListTransaksi(BuildContext context) async {
     var uri = Uri.parse(baseUrl + "api/niaga/pabrik/getPabrik").replace();
-    final tokenLocal = "N2IyN2I0N2ZmZGU3MmE4NjgxNDhjZGZlNTA4ZGFhZTY0Zjc4YmI0Yw==";
+    final tokenLocal = "OTE0YmNjNGFhZjhiNTRiMGMzMjAyMjg1YjBhZmM0MzQ5YjViNDhhZg==";
     Map<String, String> headersToken(String token) {
       return {
         'Content-Type' : 'application/json',
         'Accept' : 'application/json',
-        'Authorization' : 'Bearer $token'
+        'Authorization' : 'Bearer OTE0YmNjNGFhZjhiNTRiMGMzMjAyMjg1YjBhZmM0MzQ5YjViNDhhZg=='
       };
     }
     var _body = jsonEncode({
@@ -28,6 +28,7 @@ class TransaksiApi {
       "orderBy": "jarak_pabrik",
       "sort": "desc",
       "user_id": "85" });
+    print(_body);
     try {
       final response = await client
           .post(uri, headers: headersToken(tokenLocal), body: _body)
