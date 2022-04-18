@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                                                         Text("Jumlah pohon"),
                                                         Text(viewModel.dataKebun[index].jumlahPohon.toString()),
                                                         SizedBox(height: 8,),
-                                                        Text("Tahun Tanam"),
+                                                         Text("Tahun Tanam"),
                                                         Text(viewModel.dataKebun[index].tahunTanamId.toString()),
                                                         SizedBox(height: 16,),
                                                         Row(

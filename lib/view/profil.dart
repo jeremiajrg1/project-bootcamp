@@ -24,42 +24,57 @@ class _ProfilPageState extends State<ProfilPage> {
                   title: Text("Profil"),
                   automaticallyImplyLeading: false,
                 ),
-                body: Center(
-                  child: Container(
-                    margin: const EdgeInsets.all(16),
+                body: Container(
+                  margin: const EdgeInsets.all(8),
                     child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const CircleAvatar(
-                            backgroundImage: AssetImage("assets/profil.jpg"),
-                            radius: 50,
-                            backgroundColor: Colors.black54,
-                          ),
-                          const SizedBox(height: 16,),
-                          Text("Nama", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                          Text(viewModel.dataProfil.nama.toString(), style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-                          SizedBox(height: 16,),
-                          Text("Nama Bank", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                          Text(viewModel.dataProfil.bankName.toString(), style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-                          SizedBox(height: 16,),
-                          Text("Mobile", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                          Text(viewModel.dataProfil.mobile.toString(), style: const TextStyle(fontSize: 18)),
-                          SizedBox(height: 100,),
-                          SizedBox(
-                            height: 40,
-                            width: 300,
-                              child: ElevatedButton(
-                                  onPressed: (){
-                                    SharedPreferenceService().removeSharedPref();
-                                    Navigator.pop(context);
-                                  }, child: Text("Logout gan!"))
-                          ),
-
-                        ],
-                      ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Column(
+                                  children: [
+                                    const CircleAvatar(
+                                      backgroundImage: AssetImage("assets/profil.jpg"),
+                                      radius: 50,
+                                      backgroundColor: Colors.black54,
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(width: 20,),
+                                Column(
+                                  children: [
+                                    Text(viewModel.dataProfil.nama.toString(), style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                  ],
+                                ),
+                                SizedBox(width: 130,),
+                                Column(
+                                  children: [
+                                    ElevatedButton(
+                                        onPressed: (){
+                                          SharedPreferenceService().removeSharedPref();
+                                          Navigator.pop(context);
+                                        }, child: Text(">", style: TextStyle(fontSize: 20),),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.orange,
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 18,),
+                            Row(
+                              children: [
+                                Text("Kebun Saya", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                                SizedBox(width: 120,),
+                                ElevatedButton.icon(onPressed: (){}, icon: new Icon(Icons.add), label: Text("Tambah Kebun"), style: ElevatedButton.styleFrom(primary: Colors.orange),)
+                              ],
+                            )
+                          ],
+                        )
                     ),
-                  ),
+
                 ),
               );
             }

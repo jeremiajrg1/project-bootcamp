@@ -24,7 +24,7 @@ class PersediaanApi {
       };
     }
     var _body = jsonEncode({
-      "koperasi_id": "", "pabrik_id": pabrikId, "petani_id": petaniIdLocal, "tanggal_pengiriman": tanggal +""+ waktu, "tonasi": tonasi, "user_id": userIdLocal
+      "koperasi_id": "", "pabrik_id": pabrikId, "petani_id": petaniIdLocal, "tanggal_pengiriman": tanggal +" "+ waktu, "tonasi": tonasi, "user_id": userIdLocal
     });
     print(_body);
     try {
