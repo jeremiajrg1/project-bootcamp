@@ -23,6 +23,7 @@ class LoginApi {
       final response = await client
           .post(uri, headers: headers(), body: _body)
           .timeout(const Duration(seconds: 30));
+      print(response.body);
       if (response.statusCode == HttpStatus.ok) {
         return ResponseLoginModel.fromJson(jsonDecode(response.body));
       } else {

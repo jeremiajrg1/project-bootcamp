@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:taniku/model/response_kirimpersediaan_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:taniku/service/local/shared_pref_service.dart';
 
 class PersediaanApi {
   var client = http.Client();
@@ -12,7 +13,9 @@ class PersediaanApi {
 
   Future<KirimPersediaanModel> kirimPersediaan(String pabrikId, String nama, String tanggal, String waktu, String tonasi, BuildContext context) async {
     var uri = Uri.parse(baseUrl + "api/niaga/reservasi/add").replace();
-    final tokenLocal = "N2IyN2I0N2ZmZGU3MmE4NjgxNDhjZGZlNTA4ZGFhZTY0Zjc4YmI0Yw==";
+    final tokenLocal = await SharedPreferenceService().getStringSharedPref("token");
+    final petaniIdLocal = await SharedPreferenceService().getStringSharedPref("petani_id");
+    final userIdLocal = await SharedPreferenceService().getStringSharedPref("user_id");
     Map<String, String> headersToken(String token) {
       return {
         'Content-Type' : 'application/json',
@@ -21,8 +24,9 @@ class PersediaanApi {
       };
     }
     var _body = jsonEncode({
-      "koperasi_id": "", "pabrik_id": "8", "petani_id": "46", "tanggal_pengiriman": "2022-03-16 17:46:00", "tonasi": "1000", "user_id": "85"
+      "koperasi_id": "", "pabrik_id": pabrikId, "petani_id": petaniIdLocal, "tanggal_pengiriman": tanggal +""+ waktu, "tonasi": tonasi, "user_id": userIdLocal
     });
+    print(_body);
     try {
       final response = await client
           .post(uri, headers: headersToken(tokenLocal), body: _body)

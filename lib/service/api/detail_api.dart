@@ -79,7 +79,8 @@ class DetailApi {
   
   Future<ListSertifikat> getListSertifikat(BuildContext context, String kebun_id) async {
     var uri = Uri.parse(baseUrl + "api/niaga/kebun/getSertifikatList").replace();
-    final tokenLocal = "OTE0YmNjNGFhZjhiNTRiMGMzMjAyMjg1YjBhZmM0MzQ5YjViNDhhZg==";
+    final tokenLocal = await SharedPreferenceService().getStringSharedPref("token");
+    final userIdLocal = await SharedPreferenceService().getStringSharedPref("user_id");
     Map<String, String> headersToken(String token) {
       return {
         'Content-Type' : 'application/json',
@@ -88,7 +89,7 @@ class DetailApi {
       };
     }
     var _body = jsonEncode({
-      "user_id": "85",
+      "user_id": userIdLocal,
       "kebun_id": kebun_id,
       "orderBy": "nomor",
       "sort": "asc" });

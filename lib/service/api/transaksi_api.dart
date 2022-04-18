@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:taniku/model/response_transaksi_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:taniku/service/local/shared_pref_service.dart';
 
 class TransaksiApi {
   var client = http.Client();
@@ -12,12 +13,13 @@ class TransaksiApi {
   
   Future<TransaksiModel> getListTransaksi(BuildContext context) async {
     var uri = Uri.parse(baseUrl + "api/niaga/pabrik/getPabrik").replace();
-    final tokenLocal = "OTE0YmNjNGFhZjhiNTRiMGMzMjAyMjg1YjBhZmM0MzQ5YjViNDhhZg==";
+    final tokenLocal = await SharedPreferenceService().getStringSharedPref("token");
+    final userIdLocal = await SharedPreferenceService().getStringSharedPref("user_id");
     Map<String, String> headersToken(String token) {
       return {
         'Content-Type' : 'application/json',
         'Accept' : 'application/json',
-        'Authorization' : 'Bearer OTE0YmNjNGFhZjhiNTRiMGMzMjAyMjg1YjBhZmM0MzQ5YjViNDhhZg=='
+        'Authorization' : 'Bearer $token'
       };
     }
     var _body = jsonEncode({
@@ -27,7 +29,7 @@ class TransaksiApi {
       "longitude": "77.49",
       "orderBy": "jarak_pabrik",
       "sort": "desc",
-      "user_id": "85" });
+      "user_id": userIdLocal });
     print(_body);
     try {
       final response = await client

@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:taniku/model/response_kirim_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:taniku/service/local/shared_pref_service.dart';
 
 class KirimApi {
   var client = http.Client();
@@ -13,17 +14,19 @@ class KirimApi {
   
   Future<KirimModel> getListKirim(BuildContext context) async {
     var uri = Uri.parse(baseUrl+"api/niaga/reservasi/getAll").replace();
-    final tokenLocal = "OTE0YmNjNGFhZjhiNTRiMGMzMjAyMjg1YjBhZmM0MzQ5YjViNDhhZg==";
+    final tokenLocal = await SharedPreferenceService().getStringSharedPref("token");
+    final userIdLocal = await SharedPreferenceService().getStringSharedPref("user_id");
     Map<String, String> headersToken (String token) {
       return {
         'Content-Type' : 'application/json',
         'Accept' : 'application/json',
-        'Authorization' : 'Bearer OTE0YmNjNGFhZjhiNTRiMGMzMjAyMjg1YjBhZmM0MzQ5YjViNDhhZg=='
+        'Authorization' : 'Bearer $token'
       };
     }
     var _body = jsonEncode({
-      "page": "1", "sort": "desc", "status": "", "type_user": "PTN", "user_id": "85"
+      "page": "1", "sort": "desc", "status": "", "type_user": "PTN", "user_id": userIdLocal
     });
+    print(_body);
     try {
       final response = await client
           .post(uri, headers: headersToken(tokenLocal), body: _body)

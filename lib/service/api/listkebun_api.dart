@@ -21,14 +21,14 @@ class ListKebunApi {
       return {
         'Content-Type' : 'application/json',
         'Accept' : 'application/json',
-        'Authorization' : 'Bearer OTE0YmNjNGFhZjhiNTRiMGMzMjAyMjg1YjBhZmM0MzQ5YjViNDhhZg=='
+        'Authorization' : 'Bearer $token'
       };
     }
     var _body = jsonEncode({
       'orderBy' : 'id',
-      'petani_id' : 46,
+      'petani_id' : petaniIdLocal,
       'sort' : "asc",
-      'user_id' : 85,
+      'user_id' : userIdLocal,
     });
     try {
       final response = await client
