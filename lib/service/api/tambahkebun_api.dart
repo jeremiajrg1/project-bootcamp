@@ -5,10 +5,14 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:taniku/model/response_jenisbibit_model.dart';
+import 'package:taniku/model/response_jenisdokumen_model.dart';
 import 'package:taniku/model/response_kabupaten_model.dart';
 import 'package:taniku/model/response_kecamatan_model.dart';
 import 'package:taniku/model/response_kelurahan_model.dart';
 import 'package:taniku/model/response_provinsi_model.dart';
+import 'package:taniku/model/response_tambahsertifikasi_model.dart';
+import 'package:taniku/model/response_tipelahan_model.dart';
 import 'package:taniku/service/local/shared_pref_service.dart';
 
 class TambahKebunApi {
@@ -122,6 +126,74 @@ class TambahKebunApi {
       }
     } on TimeoutException catch (_) {
       return KelurahanModel.withError("waktu habis, silahkan coba kembali");
+    }
+  }
+
+  Future<JenisBibitModel> getJenisBibit(BuildContext context) async {
+    var uri = Uri.parse(baseUrl + "api/niaga/listJenisBibit").replace();
+    try {
+      final response = await client
+          .get(uri, headers: {})
+          .timeout(const Duration(seconds: 30));
+      if (response.statusCode == HttpStatus.ok) {
+        print(jsonDecode(response.body));
+        return JenisBibitModel.fromJson(jsonDecode(response.body));
+      } else {
+        return JenisBibitModel.withError("Gagal load data");
+      }
+    } on TimeoutException catch (_) {
+      return JenisBibitModel.withError("Waktu habis, silahkan coba kembali");
+    }
+  }
+  
+  Future<TipeLahanModel> getTipeLahan(BuildContext context) async {
+    var uri = Uri.parse(baseUrl+ "api/niaga/listStatusLahan").replace();
+    try{
+      final response = await client
+          .get(uri, headers: {})
+          .timeout(const Duration(seconds: 30));
+      if (response.statusCode == HttpStatus.ok) {
+        print(jsonDecode(response.body));
+        return TipeLahanModel.fromJson(jsonDecode(response.body));
+      } else {
+        return TipeLahanModel.withError("Gagal load data");
+      }
+    } on TimeoutException catch (_) {
+      return TipeLahanModel.withError("waktu habis, silahkan coba kembali");
+    }
+  }
+
+  Future<JenisDokumenModel> getJenisDokumen(BuildContext context) async {
+    var uri = Uri.parse(baseUrl+"api/niaga/listJenisDokumen").replace();
+    try{
+      final response = await client
+          .get(uri, headers: {})
+          .timeout(const Duration(seconds: 30));
+      if (response.statusCode == HttpStatus.ok) {
+        print(jsonDecode(response.body));
+        return JenisDokumenModel.fromJson(jsonDecode(response.body));
+      } else {
+        return JenisDokumenModel.withError("gagal load data");
+      }
+    } on TimeoutException catch (_) {
+      return JenisDokumenModel.withError("waktu habis, silahkan coba kembali");
+    }
+  }
+  
+  Future<TambahSertifikasiModel> getTambahSertifikat(BuildContext context) async {
+    var uri = Uri.parse(baseUrl + "api/niaga/listSertifikasi").replace();
+    try{
+      final response = await client
+          .get(uri, headers: {})
+          .timeout(const Duration(seconds: 30));
+      if (response.statusCode == HttpStatus.ok) {
+        print(jsonDecode(response.body));
+        return TambahSertifikasiModel.fromJson(jsonDecode(response.body));
+      } else {
+        return TambahSertifikasiModel.withError("gagal load data");
+      }
+    } on TimeoutException catch (_) {
+      return TambahSertifikasiModel.withError("waktu habis, silahkan coba kembali");
     }
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:taniku/controller/TabBar_controller.dart';
 import 'package:taniku/service/local/shared_pref_service.dart';
+import 'package:taniku/view/TambahAlamat_screen.dart';
 import 'package:taniku/view/TambahKebun_screen.dart';
 import 'package:taniku/view/detail_screen.dart';
 import 'package:taniku/viewmodel/profil_viewmodel.dart';
@@ -73,7 +75,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                 SizedBox(width: 120,),
                                 ElevatedButton.icon(onPressed: () async
                                 {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => TambahKebunScreen()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => TabControllerss()));
                                 },
                                   icon: new Icon(Icons.add), label: Text("Tambah Kebun"), style: ElevatedButton.styleFrom(primary: Colors.orange),)
                               ],
