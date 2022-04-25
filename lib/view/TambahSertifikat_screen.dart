@@ -16,6 +16,11 @@ class TambahSertifikat extends StatefulWidget {
 }
 
 class _TambahSertifikatState extends State<TambahSertifikat> {
+  final nomorSertifikatController = new TextEditingController();
+  var selectedSertif;
+  List<Map> listData = [];
+  String? img64;
+  String? foto;
 
   File? image;
 
@@ -552,7 +557,33 @@ class _TambahSertifikatState extends State<TambahSertifikat> {
                                             ),
                                           ],
                                         ),
-                                          const SizedBox(height: 16,)
+                                          const SizedBox(height: 16,),
+                                          ListView.builder(
+                                              shrinkWrap: true,
+                                              physics: const NeverScrollableScrollPhysics(),
+                                              itemCount: viewModel.listSertif.length,
+                                              itemBuilder: (context,index) {
+                                                return Container(
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(viewModel.listSertif[index].nama_sertif.toString(),),
+                                                      SizedBox(height: 12,),
+                                                      Text(viewModel.listSertif[index].no_sertif.toString(),),
+                                                      SizedBox(height: 12,),
+                                                      // Row(
+                                                      //   children: [
+                                                      //     IconButton(onPressed: (){
+                                                      //       // Navigator.push(context, MaterialPageRoute(builder: builder))
+                                                      //     },
+                                                      //         // icon: icon)
+                                                      //   ],
+                                                      // )
+                                                    ],
+                                                  ),
+                                                );
+                                              }
+                                          )
                                         ],
                                       ),
                                   );

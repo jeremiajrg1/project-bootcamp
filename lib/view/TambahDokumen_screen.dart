@@ -15,9 +15,11 @@ class TambahDokumenScreen extends StatefulWidget {
 }
 
 class _TambahDokumenScreenState extends State<TambahDokumenScreen> {
-  TextEditingController nomorDoc = TextEditingController();
-  var jenisDokumen;
-
+  final nomorDokumenController = new TextEditingController();
+  var selectedDokumen;
+  List<Map> listData = [];
+  String? img64;
+  String? foto;
   File? image;
 
   Future pickImage(ImageSource source) async {
@@ -31,22 +33,21 @@ class _TambahDokumenScreenState extends State<TambahDokumenScreen> {
     }
   }
 
-  List<Map> listData = [];
-  myDB myDatabase = myDB();
 
-  void getData(){
-    Future.delayed(const Duration(milliseconds: 500),() async {
-      listData = await myDatabase.db.rawQuery('SELECT * FROM users');
-      setState(() { });
-    });
-  }
+
+  // void getData(){
+  //   Future.delayed(const Duration(milliseconds: 500),() async {
+  //     listData = await myDatabase.db.rawQuery('SELECT * FROM users');
+  //     setState(() { });
+  //   });
+  // }
 
   @override
-  void initState() {
-    myDatabase.open();
-    getData();
-    super.initState();
-  }
+  // void initState() {
+  //   myDatabase.open();
+  //   getData();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -372,16 +373,40 @@ class _TambahDokumenScreenState extends State<TambahDokumenScreen> {
                                                 style: TextStyle(color: Colors.white),
                                               ),
                                               onPressed: () {
-                                                myDatabase.db.rawInsert("INSERT INTO dokumen (jenis_dokumen, no_dokumen) VALUES (?, ?);", [jenisDokumen, nomorDoc.text]);
-                                                Scaffold.of(context).showSnackBar(const SnackBar(content: Text("New Dokumen Added")));
-                                                jenisDokumen = "";
-                                                nomorDoc.text = "";
+                                                // viewModel.addDokumen(namaDokumen, noDokumen, image, context);
+                                                // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("New Dokumen added")));
                                               },
                                             ),
                                           ),
                                         ],
                                       ),
-                                        const SizedBox(height: 16,)
+                                        const SizedBox(height: 16,),
+                                        ListView.builder(
+                                            shrinkWrap: true,
+                                            physics: const NeverScrollableScrollPhysics(),
+                                            itemCount: viewModel.listDokumen.length,
+                                            itemBuilder: (context,index) {
+                                              return Container(
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(viewModel.listDokumen[index].nama_dokumen.toString(),),
+                                                    SizedBox(height: 12,),
+                                                    Text(viewModel.listDokumen[index].no_dokumen.toString(),),
+                                                    SizedBox(height: 12,),
+                                                    // Row(
+                                                    //   children: [
+                                                    //     IconButton(onPressed: (){
+                                                    //       // Navigator.push(context, MaterialPageRoute(builder: builder))
+                                                    //     },
+                                                    //         // icon: icon)
+                                                    //   ],
+                                                    // )
+                                                  ],
+                                                ),
+                                              );
+                                            }
+                                        )
                                       ],
                                     ),
                                 );
