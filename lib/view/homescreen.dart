@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:taniku/view/detail_screen.dart';
 import 'package:taniku/view/screen_new.dart';
@@ -14,7 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-
+  Completer<GoogleMapController> _controller = Completer();
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomeViewModel>(
@@ -158,10 +161,34 @@ class _HomePageState extends State<HomePage> {
                                                             SizedBox(width: 8,),
                                                             Text(viewModel.dataKebun[index].alamat.toString()),
                                                           ],
-                                                        )
+                                                        ),
+                                                        Wrap(
+                                                          children: [
+                                                            Container(
+                                                              margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+                                                              height: 150,
+                                                              width: 280,
+                                                              child: GoogleMap(
+                                                                mapType: MapType.normal,
+                                                                markers: <Marker> {Marker(markerId: const MarkerId("1"),
+                                                                    position: LatLng(37.4219532
+                                                                        , 122.0839915
+                                                                    )
+                                                                )},
+                                                                initialCameraPosition: CameraPosition(
+                                                                    target: LatLng(37.4219532
+                                                                        , 122.0839915), zoom: 15),
+                                                                onMapCreated: (GoogleMapController controller) {
+                                                                  _controller.complete(controller);
+                                                                },
+                                                              ),
+                                                            ),
+                                                            const SizedBox(height: 8,),
+                                                          ],
+                                                        ),
                                                       ],
                                                     ),
-                                                  )
+                                                  ),
                                                 ],
                                               ),
                                             )

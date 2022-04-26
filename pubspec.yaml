@@ -39,6 +39,8 @@ dependencies:
   flutter_local_notifications: ^9.4.0
   image_picker: ^0.8.5
   sqflite: ^2.0.2+1
+  location: ^4.3.0
+  google_maps_flutter: ^2.1.3
 
 
 

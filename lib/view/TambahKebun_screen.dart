@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:taniku/controller/ControllerAddKebun.dart';
 import 'package:taniku/viewmodel/tambahkebun_viewmodel.dart';
 // import 'package:taniku/viewmodel/AlamatViewModel.dart';
 
@@ -11,14 +12,23 @@ import 'package:taniku/viewmodel/tambahkebun_viewmodel.dart';
 
 
 class TambahKebun extends StatefulWidget {
-  const TambahKebun({Key? key}) : super(key: key);
+  final ControllerViewModel parentViewModel;
+  final next, previous;
+  const TambahKebun({Key? key,
+  required this.parentViewModel, required this.next, required this.previous
+  }) : super(key: key);
 
   @override
   State<TambahKebun> createState() => _TambahKebunState();
 }
 
 class _TambahKebunState extends State<TambahKebun> {
-
+  TextEditingController luasKebun = TextEditingController();
+  TextEditingController tahunTanam = TextEditingController();
+  TextEditingController produksi = TextEditingController();
+  TextEditingController jumlahPohon = TextEditingController();
+  var selectedJenisBibit;
+  var selectedStatusLahan;
   File? image;
 
   // get value => 'Gallery';
@@ -87,6 +97,7 @@ class _TambahKebunState extends State<TambahKebun> {
                                     width: 170,
                                     height: 60,
                                     child: TextFormField(
+                                      controller: luasKebun,
                                       keyboardType: TextInputType.number,
                                       style: const TextStyle(color: Colors.black45),
                                       // controller: dataAlamatController,
@@ -158,6 +169,7 @@ class _TambahKebunState extends State<TambahKebun> {
                                         // borderRadius: BorderRadius.all(Radius.circular(32)),
                                         hint: Text("Pilih Jenis Bibit"),
                                         isExpanded: true,
+                                        value: selectedJenisBibit,
                                         // value: selectedProvinsi,
                                         items: viewModel.DataBibit.map((value) {
                                           return DropdownMenuItem(
@@ -167,6 +179,7 @@ class _TambahKebunState extends State<TambahKebun> {
                                         }).toList(),
                                         onChanged: (newValue){
                                           setState(() {
+                                            selectedJenisBibit = newValue;
                                             // print(newValue.toString());
                                             // selectedProvinsi = newValue!;
                                             // selectedKabKota = null;
@@ -226,6 +239,7 @@ class _TambahKebunState extends State<TambahKebun> {
                                         // borderRadius: BorderRadius.all(Radius.circular(32)),
                                         hint: Text("Pilih Tipe Lahan"),
                                         isExpanded: true,
+                                        value: selectedStatusLahan,
                                         // value: selectedProvinsi,
                                         items: viewModel.DataLahanku.map((value) {
                                           return DropdownMenuItem(
@@ -235,6 +249,7 @@ class _TambahKebunState extends State<TambahKebun> {
                                         }).toList(),
                                         onChanged: (newValue){
                                           setState(() {
+                                            selectedStatusLahan = newValue;
                                             // print(newValue.toString());
                                             // selectedProvinsi = newValue!;
                                             // selectedKabKota = null;
@@ -254,7 +269,7 @@ class _TambahKebunState extends State<TambahKebun> {
                                     text: TextSpan(
                                         children: [
                                           const TextSpan(
-                                            text: 'Jenis Bibit',
+                                            text: 'Tahun Tanam',
                                             style: TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
                                           ),
                                           WidgetSpan(
@@ -275,11 +290,12 @@ class _TambahKebunState extends State<TambahKebun> {
                                     width: 170,
                                     height: 60,
                                     child: TextFormField(
+                                      controller: tahunTanam,
                                       keyboardType: TextInputType.number,
                                       style: const TextStyle(color: Colors.black45),
                                       // controller: dataAlamatController,
                                       decoration: const InputDecoration(
-                                        hintText: "Luas Tanam", hintStyle: TextStyle(
+                                        hintText: "Tahun Tanam", hintStyle: TextStyle(
                                         fontFamily: "Poppins",
                                       ),
                                         enabledBorder: OutlineInputBorder(
@@ -337,6 +353,7 @@ class _TambahKebunState extends State<TambahKebun> {
                                     width: 170,
                                     height: 60,
                                     child: TextFormField(
+                                      controller: jumlahPohon,
                                       keyboardType: TextInputType.number,
                                       style: const TextStyle(color: Colors.black45),
                                       // controller: dataAlamatController,
@@ -393,6 +410,7 @@ class _TambahKebunState extends State<TambahKebun> {
                                     width: 170,
                                     height: 60,
                                     child: TextFormField(
+                                      controller: produksi,
                                       keyboardType: TextInputType.number,
                                       style: const TextStyle(color: Colors.black45),
                                       // controller: dataAlamatController,
@@ -685,7 +703,13 @@ class _TambahKebunState extends State<TambahKebun> {
                                       style: TextStyle(color: Colors.white),
                                     ),
                                     onPressed: () {
-
+                                      widget.parentViewModel.addKebunModel.luasKebun = luasKebun.text;
+                                      widget.parentViewModel.addKebunModel.jenisBibitId = selectedJenisBibit.toString();
+                                      widget.parentViewModel.addKebunModel.statusLahanId = selectedStatusLahan.toString();
+                                      widget.parentViewModel.addKebunModel.tahunTanamId = tahunTanam.text;
+                                      widget.parentViewModel.addKebunModel.jumlahPohon = jumlahPohon.text;
+                                      widget.parentViewModel.addKebunModel.potensiProduksi = produksi.text;
+                                      widget.next.call;
                                     },
                                   ),
                                 ),

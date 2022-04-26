@@ -21,7 +21,7 @@ class myDB {
                     CREATE TABLE IF NOT EXISTS dokumen( 
                           id integer not null primary key autoincrement,
                           dokumen_name varchar(255) not null,
-                          nomor_dokumen varchar(255) not null,
+                          no_dokumen varchar(255) not null,
                           foto varchar(500) not null
                       );
                       //create more table here
@@ -51,7 +51,7 @@ class myDB {
         return ListTambahDokumen(
           id: data[i]['id'],
           nama_dokumen: data[i]['dokumen_name'],
-          no_dokumen: data[i]['nomor_dokumen'],
+          no_dokumen: data[i]['no_dokumen'],
           foto: data[i]['foto'],
         );
       });
@@ -67,7 +67,7 @@ class myDB {
       return ListTambahDokumen(
         id: maps[0]['id'],
         nama_dokumen: maps[0]['dokumen_name'],
-        no_dokumen: maps[0]['nomor_dokumen'],
+        no_dokumen: maps[0]['no_dokumen'],
         foto: maps[0]['foto'],
       );
     }
@@ -76,12 +76,12 @@ class myDB {
   }
 
   addDokumen(String namaDokumen, String noDokumen, String image, BuildContext context) async {
-    await db.rawInsert("INSERT INTO dokumen(dokumen_name, nomor_dokumen, foto) VALUES (?, ?, ?);",
+    await db.rawInsert("INSERT INTO dokumen(dokumen_name, no_dokumen, foto) VALUES (?, ?, ?);",
         [namaDokumen, noDokumen, image]);
   }
 
   editDokumen(int id, String namaDokumen, String noDokumen, String image, BuildContext context) async {
-    await db.rawInsert("UPDATE dokumen SET dokumen_name = ?, nomor_dokumen = ?, foto = ? WHERE id = ?",
+    await db.rawInsert("UPDATE dokumen SET dokumen_name = ?, no_dokumen = ?, foto = ? WHERE id = ?",
         [namaDokumen, noDokumen, image.toString(), id]);
   }
 

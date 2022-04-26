@@ -75,7 +75,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                 SizedBox(width: 120,),
                                 ElevatedButton.icon(onPressed: () async
                                 {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => TabControllerss()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => TabControllerss(petaniId: viewModel.dataProfil.id, UserId: viewModel.dataProfil.userId,)));
                                 },
                                   icon: new Icon(Icons.add), label: Text("Tambah Kebun"), style: ElevatedButton.styleFrom(primary: Colors.orange),)
                               ],

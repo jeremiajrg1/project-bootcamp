@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:taniku/model/addKebunModel.dart';
 import 'package:taniku/model/response_jenisbibit_model.dart';
 import 'package:taniku/model/response_jenisdokumen_model.dart';
 import 'package:taniku/model/response_kabupaten_model.dart';
@@ -194,6 +195,36 @@ class TambahKebunApi {
       }
     } on TimeoutException catch (_) {
       return TambahSertifikasiModel.withError("waktu habis, silahkan coba kembali");
+    }
+  }
+
+  Future<String> addKebun(AddKebunModel addKebunModel, BuildContext context) async {
+    var uri = Uri.parse(baseUrl + "api/niaga/kebun/addKebun").replace();
+    final tokenLocal = await SharedPreferenceService().getStringSharedPref("token");
+    // final petaniIdLocal = await SharedPreferenceService().getStringSharedPref("petani_id");
+    // final userIdLocal = await SharedPreferenceService().getStringSharedPref("user_id");
+    Map<String, String> headersToken(String token) {
+      return {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token'
+      };
+    }
+    var _body = jsonEncode(addKebunModel);
+    // print(tokenLocal);
+    print(_body);
+    try {
+      final response = await client
+          .post(uri, headers: headersToken(tokenLocal), body: _body)
+          .timeout(const Duration(seconds: 30));
+      print(response.body);
+      if (response.statusCode == HttpStatus.ok) {
+        return "";
+      } else {
+        return "";
+      }
+    } on TimeoutException catch (_) {
+      return "";
     }
   }
 }
